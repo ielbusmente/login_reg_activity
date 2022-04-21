@@ -18,6 +18,7 @@ $br: 4px;
 
 *, *:before, *:after {
   box-sizing: border-box;
+  transition: 0.3s;
 }
 
 html {
@@ -25,7 +26,7 @@ html {
 }
 
 body {
-  background:$body-bg;
+  background:$form-bg;
   font-family: 'Titillium Web', sans-serif;
 }
 
@@ -39,12 +40,17 @@ a {
 }
 
 .form {
+  transition:1s;
   background:rgba($form-bg,.9);
   padding: 40px;
   max-width:600px;
   margin:40px auto;
   border-radius:$br;
-  box-shadow:0 4px 10px 4px rgba($form-bg,.3);
+  
+  &:hover, 
+  &:focus {
+    box-shadow:0 4px 10px 4px rgba($white,.3);
+    transform: translateY(-10px)}
 }
 
 .tab-group {
@@ -169,9 +175,11 @@ textarea {
   outline:none;
   border-radius:0;
   padding:15px 0;
-  font-size:2rem;
+  font-size:1.4rem;
   font-weight:$bold;
-  text-transform:uppercase;
+  user-select: none;
+  cursor: pointer;
+  // text-transform:uppercase;
   letter-spacing:.1em;
   background:$main;
   color:$white;
@@ -182,10 +190,13 @@ textarea {
     background:$main-dark;}
 }
 
-.button-block {
-  display:block;
-  width:100%;
+.cancel {
+  background:$main-light;
 }
+// .button-block {
+//   display:block;
+//   width:50%;
+// }
 
 .forgot {
   margin-top:-20px;

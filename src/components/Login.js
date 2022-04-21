@@ -12,33 +12,35 @@ const Login = () => {
           // action="/" method="post"
           >
           
-            <div class="field-wrap">
+            <div className="field-wrap">
             <label className={`${studentNumb!=='' ? `active highlight`:``}`}>
-               Student Number<span class="req">*</span>
+               Student Number<span className="req">*</span>
             </label>
-            <input type="text"required autocomplete="off" onChange={(e)=>setstudentNumb(e.target.value)} value={studentNumb}/>
+            <input type="text"required autoComplete="off" onChange={(e)=>setstudentNumb(e.target.value)} value={studentNumb}/>
           </div>
           
-          <div class="field-wrap">
+          <div className="field-wrap">
             <label className={`${password!=='' ? `active highlight`:``}`}>
-              Password<span class="req">*</span>
+              Password<span className="req">*</span>
             </label>
-            <input type="password"required autocomplete="off" onChange={(e)=>setpassword(e.target.value)} value={password}/>
+            <input type="password"required autoComplete="off" onChange={(e)=>setpassword(e.target.value)} value={password}/>
           </div>
           
-          {/* <p class="forgot"><a href="#">Forgot Password?</a></p> */}
+          {/* <p className="forgot"><a href="#">Forgot Password?</a></p> */}
           
-          <button class="button button-block" onClick={()=>{
-           studentNumb!=='' && password!=='' &&  alert('Welcome');
-          }}>
-            Log In
-          </button>
-          <button type='button' class="button button-block" onClick={()=>{
-            setstudentNumb(``)
-            setpassword(``)
-          }}>
-            Cancel
-          </button>
+          <div style={{display:'flex'}}>
+            <button style={{width:'70%'}} className="button" onClick={()=>{
+            studentNumb!=='' && password!=='' &&  alert('Welcome');
+            }}>
+              Log In
+            </button>
+            <button style={{width:'30%'}} type='button' className="button cancel" onClick={()=>{
+              setstudentNumb(``)
+              setpassword(``)
+            }}>
+              Cancel
+            </button>
+          </div>
           
           </form>
 
