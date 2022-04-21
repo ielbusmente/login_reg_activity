@@ -86,34 +86,36 @@ const Registration = () => {
             <input type="password"required autocomplete="off" onChange={(e)=>setConfirmPassword(e.target.value)} value={confirmPassword}/>
           </div>
 
-          <button class="button button-block" onClick={()=>{
-           studentNumb!=='' 
-           && firstName!==''
-           && lastName!==''
-           && middleName!==''
-           && college!==''
-           && program!==''
-           && yearLevel!==''
-           && password!==''
-           && confirmPassword!==''
-            &&  alert('Inputted Details are being saved');
-          }}>
-            Submit
-          </button>
-          <br />
-          <button type='button' class="button button-block" onClick={()=>{
-            setstudentNumb(``)
-            setfirstName(``)
-            setlastName(``)
-            setmiddleName(``)
-            setcollege(``)
-            setprogram(``)
-            setyearLevel(``)
-            setpassword(``)
-            setConfirmPassword(``)
-          }}>
-            Cancel
-          </button>
+            <div style={{display:'flex'}}>
+              <button style={{width:'70%'}} class="button" onClick={()=>{
+                studentNumb!=='' 
+                && firstName!==''
+                && lastName!==''
+                && middleName!==''
+                && college!==''
+                && program!==''
+                && yearLevel!==''
+                && password!==''
+                && confirmPassword!==''
+                && alert('Inputted Details are being saved');
+              }}>
+                Submit
+              </button>
+              <br />
+              <button style={{width:'30%'}} type='button' class="button cancel" onClick={()=>{
+                setstudentNumb(``)
+                setfirstName(``)
+                setlastName(``)
+                setmiddleName(``)
+                setcollege(``)
+                setprogram(``)
+                setyearLevel(``)
+                setpassword(``)
+                setConfirmPassword(``)
+              }}>
+                Cancel
+              </button>
+            </div>
           
           </form>
 

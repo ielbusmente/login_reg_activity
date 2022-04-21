@@ -6,7 +6,7 @@ $white: #ffffff;
 
 $main: #1ab188;
 $main-light: lighten($main,5%);
-$main-dark: darken($main,5%);
+$main-dark: darken($main,20%);
 
 $gray-light: #a0b3b0;
 $gray: #ddd;
@@ -181,7 +181,7 @@ textarea {
   cursor: pointer;
   // text-transform:uppercase;
   letter-spacing:.1em;
-  background:$main;
+  background:$main-light;
   color:$white;
 //   transition:all.5s ease;
 //   -webkit-appearance: none;
@@ -191,7 +191,7 @@ textarea {
 }
 
 .cancel {
-  background:$main-light;
+  background:$main;
 }
 // .button-block {
 //   display:block;
