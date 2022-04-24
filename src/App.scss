@@ -1,10 +1,7 @@
-// @import "compass/css3";
-
 $body-bg: #c1bdba;
-$form-bg: #13232f;
-$white: #ffffff;
+$form-bg: #13232f; 
 
-$main: #1ab188;
+$main: #1ab188; 
 $main-light: lighten($main,5%);
 $main-dark: darken($main,20%);
 
@@ -13,62 +10,57 @@ $gray: #ddd;
 
 $thin: 300;
 $normal: 400;
-$bold: 600;
-$br: 4px;
+$bold: 600; 
+$fontSize:14px;
 
 *, *:before, *:after {
   box-sizing: border-box;
   transition: 0.3s;
-}
+} 
 
-html {
-	overflow-y: scroll; 
-}
-
-body {
+#root {
   background:$form-bg;
   font-family: 'Titillium Web', sans-serif;
-}
-
-a {
-  text-decoration:none;
-  color:$main;
-  transition:.5s ease;
-  &:hover {
-    color:$main-dark;
-  }
-}
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+} 
 
 .form {
+  width:80%;
   transition:1s;
   background:rgba($form-bg,.9);
-  padding: 40px;
-  max-width:600px;
-  margin:40px auto;
-  border-radius:$br;
-  
+  padding: 100px 140px; 
+  border-radius:20px;
+  display: flex;
+  flex-direction: column;
   &:hover, 
-  &:focus {
-    box-shadow:0 4px 10px 4px rgba($white,.3);
+  &:focus,
+  &:active
+   {
+    box-shadow:0 4px 10px 4px rgba(white,.3);
     transform: translateY(-10px)}
 }
 
 .tab-group {
   list-style:none;
   padding:0;
-  margin:0 0 40px 0;
+  margin:0 0 40px 0; 
   &:after {
     content: "";
     display: table;
     clear: both;
-  }
-  li a {
+  }  
+  li div {
+    user-select: none;
     display:block;
     text-decoration:none;
     padding:15px;
     background:rgba($gray-light,.25);
     color:$gray-light;
-    font-size:20px;
+    font-size:1em;
     float:left;
     width:50%;
     text-align:center;
@@ -76,23 +68,26 @@ a {
     transition:.5s ease;
     &:hover {
       background:$main-dark;
-      color:$white;
+      color:white;
     }
   }
-  .active a {
+  .active div {
     background:$main;
-    color:$white;
+    color:white;
   }
+} 
+
+.btlrad { 
+  border-top-left-radius: 10px; 
 }
-
-// .tab-content > div:last-child {
-//   display:none;
-// }
-
+.btrrad { 
+  border-top-right-radius: 10px; 
+}
+    
 
 h1 {
   text-align:center;
-  color:$white;
+  color:white;
   font-weight:$thin;
   margin:0 0 40px;
 }
@@ -101,11 +96,10 @@ label {
   position:absolute;
   transform:translateY(6px);
   left:13px;
-  color:rgba($white,.5);
-  transition:all 0.25s ease;
-//   -webkit-backface-visibility: hidden;
+  color:rgba(white,.5);
+  transition:all 0.25s ease; 
   pointer-events: none;
-  font-size:22px;
+  font-size:$fontSize;
   .req {
   	margin:2px;
   	color:$main;
@@ -115,26 +109,26 @@ label {
 label.active {
   transform:translateY(50px);
   left:2px;
-  font-size:14px;
+  font-size:$fontSize;
   .req {
     opacity:0;
   }
 }
 
 label.highlight {
-	color:$white;
+	color:white;
 }
 
 input, textarea {
-  font-size:22px;
+  font-size:$fontSize;
   display:block;
   width:100%;
   height:100%;
-  padding:5px 10px;
+  padding:10px 15px;
   background:none;
   background-image:none;
   border:1px solid $gray-light;
-  color:$white;
+  color:white;
   border-radius:0;
   transition:border-color .25s ease, box-shadow .25s ease;
   &:focus {
@@ -150,27 +144,20 @@ textarea {
 
 .field-wrap {
   position:relative;
-  margin-bottom:40px;
+  margin-bottom:49px;
 }
-
-.top-row {
-  &:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-
-  > div {
-    float:left;
-    width:48%;
-    margin-right:4%;
-    &:last-child { 
-      margin:0;
-    }
+ 
+.buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around; 
+  > button:nth-child(1) { 
+    border-bottom-left-radius: 10px;
   }
 }
 
 .button {
+  flex: auto;
   border:0;
   outline:none;
   border-radius:0;
@@ -178,27 +165,40 @@ textarea {
   font-size:1.4rem;
   font-weight:$bold;
   user-select: none;
-  cursor: pointer;
-  // text-transform:uppercase;
+  cursor: pointer; 
   letter-spacing:.1em;
   background:$main-light;
-  color:$white;
-//   transition:all.5s ease;
-//   -webkit-appearance: none;
+  color:white; 
   &:hover, 
   &:focus {
     background:$main-dark;}
 }
 
 .cancel {
-  background:$main;
-}
-// .button-block {
-//   display:block;
-//   width:50%;
-// }
+  background:$main; 
+  border-bottom-right-radius: 10px;
+} 
+ 
 
-.forgot {
-  margin-top:-20px;
-  text-align:right;
-}
+@media (min-width:1200px) {
+  .row {
+    display:flex;
+    justify-content: space-around;
+    flex-direction: row;
+    &-3 > div {
+      width:33%;
+    }
+    &-2 > div {
+      width:50%;
+    }
+  }
+  .form {
+    width: 50%;
+  }
+  .buttons {
+    flex-direction: row;
+    > button:nth-child(1) {
+      width:30%;
+    }
+   } 
+} 
