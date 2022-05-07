@@ -9,8 +9,12 @@ const Login = ({ setstudent, auth }) => {
 
 		seterror("");
 		const manggagamit = auth(studentNumb, password);
-		if (studentNumb >= 9999999999 || studentNumb <= 1000000000)
-			return seterror("Student Number must be 10 digits");
+		if (
+			studentNumb >= 9999999999 ||
+			studentNumb <= 1000000000 ||
+			studentNumb % 1 !== 0
+		)
+			return seterror("Student Number must be 10 digits without a decimal");
 		if (!manggagamit.passMatch)
 			return seterror("Student Number/Password is incorrect");
 
