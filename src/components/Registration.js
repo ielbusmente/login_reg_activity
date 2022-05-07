@@ -21,7 +21,7 @@ const Registration = ({ findUser, rehistro }) => {
 			password.match(/[a-z]+/) &&
 			password.match(/[0-9]+/) &&
 			password.match(/[A-Z]+/) &&
-			password.match(/[$&+,:;=?@#|'<>.^*()%!-_]+/) &&
+			password.match(/[$&+,:;=?@#|'<>.^*()%!_-]+/) &&
 			password.length >= 8 &&
 			password.length <= 20
 		);
