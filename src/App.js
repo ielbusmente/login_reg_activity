@@ -19,8 +19,8 @@ function App() {
 			college: "CICS",
 			program: "BSIT",
 			yearLevel: "4",
-			password: "$2a$10$UpHaNUlLn3isdmM64Qpo5eKJHXiRyz/CvSr0WPoz6KVey9uHzhwiu",
-		}, //123123aA
+			password: "$2a$10$7U24cUfiK9KtOk3ST9WuH.2v6.Rr6DmG4g5XlXsqOP14dGSXayhR6",
+		}, //123123aA!
 		{
 			lastName: "Busmente",
 			firstName: "Daniel",

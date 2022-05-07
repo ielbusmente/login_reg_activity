@@ -3,13 +3,17 @@ import React, { useState } from "react";
 const Login = ({ setstudent, auth }) => {
 	const [studentNumb, setstudentNumb] = useState(``);
 	const [password, setpassword] = useState(``);
-	const [error, seterror] = useState(false);
+	const [error, seterror] = useState("");
 	function handleLogin(e) {
 		e.preventDefault();
 
 		seterror("");
 		const manggagamit = auth(studentNumb, password);
-		if (!manggagamit.passMatch) seterror(true);
+		if (studentNumb >= 9999999999 || studentNumb <= 1000000000)
+			return seterror("Student Number must be 10 digits");
+		if (!manggagamit.passMatch)
+			return seterror("Student Number/Password is incorrect");
+
 		setstudent(manggagamit.user);
 		alert("Welcome");
 	}
@@ -71,7 +75,7 @@ const Login = ({ setstudent, auth }) => {
 						style={{ visibility: error ? "visible" : "hidden" }}
 						className="error-msg"
 					>
-						<span>Student Number/Password is incorrect</span>
+						<span>{error}</span>
 					</div>
 				</form>
 			</div>

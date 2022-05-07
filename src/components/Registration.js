@@ -21,6 +21,7 @@ const Registration = ({ findUser, rehistro }) => {
 			password.match(/[a-z]+/) &&
 			password.match(/[0-9]+/) &&
 			password.match(/[A-Z]+/) &&
+			password.match(/[$&+,:;=?@#|'<>.^*()%!-]+/) &&
 			password.length >= 8 &&
 			password.length <= 20
 		);
@@ -46,7 +47,7 @@ const Registration = ({ findUser, rehistro }) => {
 			if (!passwordValid) {
 				setpasswordError("error-input");
 				errorString +=
-					"Password should have atleast 8 character and not more than 20 - including numbers with mixed upper and lowercase letters\n";
+					"Password should have atleast 8 character and not more than 20 - atleast including a number, a special character, an upper and lowercase letter\n";
 			}
 			if (!passwordsMatch) {
 				setpasswordError("error-input");
@@ -66,10 +67,27 @@ const Registration = ({ findUser, rehistro }) => {
 			yearLevel,
 			password
 		);
-
+		const temp = studentNumb;
 		alert("Inputted Details are being saved");
+		clrea();
+		alert(`Student Number ${temp} successfully registerd.`);
 	}
 
+	function clrea() {
+		setstudentNumb(``);
+		setfirstName(``);
+		setlastName(``);
+		setmiddleName(``);
+		setcollege(``);
+		setprogram(``);
+		setyearLevel(``);
+		setpassword(``);
+		setConfirmPassword(``);
+		seterror("");
+		setstudentNumberror("");
+		setpasswordError("");
+		setpasswordConfError("");
+	}
 	return (
 		<div>
 			<div id="signup">
@@ -130,7 +148,8 @@ const Registration = ({ findUser, rehistro }) => {
 							<input
 								type="number"
 								required
-								maxLength={10}
+								max={9999999999}
+								min={1000000000}
 								className={`${studentNumberror}`}
 								autoComplete="off"
 								onChange={e => {
@@ -214,25 +233,7 @@ const Registration = ({ findUser, rehistro }) => {
 
 					<div className="buttons">
 						<button className="button">Submit</button>
-						<button
-							type="button"
-							className="button cancel"
-							onClick={() => {
-								setstudentNumb(``);
-								setfirstName(``);
-								setlastName(``);
-								setmiddleName(``);
-								setcollege(``);
-								setprogram(``);
-								setyearLevel(``);
-								setpassword(``);
-								setConfirmPassword(``);
-								seterror("");
-								setstudentNumberror("");
-								setpasswordError("");
-								setpasswordConfError("");
-							}}
-						>
+						<button type="button" className="button cancel" onClick={clrea}>
 							Cancel
 						</button>
 					</div>
