@@ -35,14 +35,19 @@ const Registration = ({ findUser, rehistro }) => {
 		setpasswordConfError("");
 
 		const invalidStudentNumber = findUser(studentNumb);
-    const invalidDigits = 
-    studentNumb >= 9999999999 ||
-    studentNumb <= 1000000000 ||
-    studentNumb % 1 !== 0;
+		const invalidDigits =
+			studentNumb >= 9999999999 ||
+			studentNumb <= 1000000000 ||
+			studentNumb % 1 !== 0;
 		const passwordValid = isPasswordValid();
 		const passwordsMatch = password === confirmPassword;
 
-		if (invalidStudentNumber || !passwordValid || !passwordsMatch || invalidDigits) {
+		if (
+			invalidStudentNumber ||
+			!passwordValid ||
+			!passwordsMatch ||
+			invalidDigits
+		) {
 			let errorString = "";
 			if (invalidStudentNumber) {
 				setstudentNumberror("error-input");
@@ -134,11 +139,10 @@ const Registration = ({ findUser, rehistro }) => {
 							<label
 								className={`${middleName !== "" ? `active highlight` : ``}`}
 							>
-								Middle Name<span className="req">*</span>
+								Middle Name
 							</label>
 							<input
 								type="text"
-								required
 								autoComplete="off"
 								onChange={e => setmiddleName(e.target.value)}
 								value={middleName}
