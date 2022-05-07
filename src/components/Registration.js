@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Registration = () => {
+const Registration = ({ findUser }) => {
 	const [studentNumb, setstudentNumb] = useState(``);
 	const [lastName, setlastName] = useState(``);
 	const [firstName, setfirstName] = useState(``);
@@ -10,9 +10,53 @@ const Registration = () => {
 	const [yearLevel, setyearLevel] = useState(``);
 	const [password, setpassword] = useState(``);
 	const [confirmPassword, setConfirmPassword] = useState(``);
+	const [error, seterror] = useState(``);
+	const [studentNumberror, setstudentNumberror] = useState(``);
+	const [passwordError, setpasswordError] = useState(``);
+	const [passwordConfError, setpasswordConfError] = useState(``);
+
+	function isPasswordValid() {
+		return (
+			password.match(/[a-z]+/) &&
+			password.match(/[0-9]+/) &&
+			password.match(/[A-Z]+/) &&
+			password.length >= 8 &&
+			password.length <= 20
+		);
+	}
 
 	function handleSubmit(e) {
 		e.preventDefault();
+		seterror("");
+		setstudentNumberror("");
+		setpasswordError("");
+		setpasswordConfError("");
+
+		const invalidStudentNumber = findUser(studentNumb);
+		const passwordValid = isPasswordValid();
+		const passwordsMatch = password === confirmPassword;
+
+		if (invalidStudentNumber || !passwordValid || !passwordsMatch) {
+			let errorString = "";
+			if (invalidStudentNumber) {
+				setstudentNumberror("error-input");
+				errorString += "Student Number already registered\n";
+			}
+			if (!passwordValid) {
+				setpasswordError("error-input");
+				errorString +=
+					"Password should have atleast 8 character and not more than 20 - including numbers with mixed upper and lowercase letters\n";
+			}
+			if (!passwordsMatch) {
+				setpasswordError("error-input");
+				setpasswordConfError("error-input");
+				errorString += "Passwords do not match\n";
+			}
+			console.log(errorString);
+			return seterror(errorString);
+		}
+
+		alert("Inputted Details are being saved");
 	}
 
 	return (
@@ -21,7 +65,9 @@ const Registration = () => {
 				<form onSubmit={handleSubmit}>
 					<div className="row row-3">
 						<div className="field-wrap">
-							<label className={`${lastName !== "" ? `active highlight` : ``}`}>
+							<label
+								className={`${lastName !== "" ? `active highlight` : ``} `}
+							>
 								Last Name<span className="req">*</span>
 							</label>
 							<input
@@ -66,7 +112,7 @@ const Registration = () => {
 					<div className="row row-2">
 						<div className="field-wrap">
 							<label
-								className={`${studentNumb !== "" ? `active highlight` : ``}`}
+								className={`${studentNumb !== "" ? `active highlight` : ``} `}
 							>
 								Student Number (used for log in)<span className="req">*</span>
 							</label>
@@ -74,11 +120,10 @@ const Registration = () => {
 								type="number"
 								required
 								maxLength={10}
+								className={`${studentNumberror}`}
 								autoComplete="off"
 								onChange={e => {
-									return !e.target.value.includes("e")
-										? setstudentNumb(e.target.value)
-										: setstudentNumb("");
+									setstudentNumb(e.target.value);
 								}}
 								value={studentNumb}
 							/>
@@ -117,7 +162,7 @@ const Registration = () => {
 								Year Level<span className="req">*</span>
 							</label>
 							<input
-								type="text"
+								type="number"
 								required
 								autoComplete="off"
 								onChange={e => setyearLevel(e.target.value)}
@@ -127,13 +172,14 @@ const Registration = () => {
 					</div>
 
 					<div className="field-wrap">
-						<label className={`${password !== "" ? `active highlight` : ``}`}>
+						<label className={`${password !== "" ? `active highlight` : ``}  `}>
 							Password<span className="req">*</span>
 						</label>
 						<input
 							type="password"
 							required
 							autoComplete="off"
+							className={`${passwordError}`}
 							onChange={e => setpassword(e.target.value)}
 							value={password}
 						/>
@@ -141,7 +187,7 @@ const Registration = () => {
 
 					<div className="field-wrap">
 						<label
-							className={`${confirmPassword !== "" ? `active highlight` : ``}`}
+							className={`${confirmPassword !== "" ? `active highlight` : ``} `}
 						>
 							Confirm Password<span className="req">*</span>
 						</label>
@@ -149,29 +195,14 @@ const Registration = () => {
 							type="password"
 							required
 							autoComplete="off"
+							className={`${passwordConfError}`}
 							onChange={e => setConfirmPassword(e.target.value)}
 							value={confirmPassword}
 						/>
 					</div>
 
 					<div className="buttons">
-						<button
-							className="button"
-							onClick={() => {
-								studentNumb !== "" &&
-									firstName !== "" &&
-									lastName !== "" &&
-									middleName !== "" &&
-									college !== "" &&
-									program !== "" &&
-									yearLevel !== "" &&
-									password !== "" &&
-									confirmPassword !== "" &&
-									alert("Inputted Details are being saved");
-							}}
-						>
-							Submit
-						</button>
+						<button className="button">Submit</button>
 						<button
 							type="button"
 							className="button cancel"
@@ -185,10 +216,20 @@ const Registration = () => {
 								setyearLevel(``);
 								setpassword(``);
 								setConfirmPassword(``);
+								seterror("");
+								setstudentNumberror("");
+								setpasswordError("");
+								setpasswordConfError("");
 							}}
 						>
 							Cancel
 						</button>
+					</div>
+					<div
+						style={{ visibility: error ? "visible" : "hidden" }}
+						className="error-msg"
+					>
+						<span>{error}</span>
 					</div>
 				</form>
 			</div>

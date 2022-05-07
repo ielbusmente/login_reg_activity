@@ -4,9 +4,11 @@ $form-bg: #13232f;
 $main: #1ab188; 
 $main-light: lighten($main,5%);
 $main-dark: darken($main,20%);
+$danger: rgb(255, 104, 104);
 
 $gray-light: #a0b3b0;
 $gray: #ddd;
+
 
 $thin: 300;
 $normal: 400;
@@ -173,12 +175,27 @@ textarea {
   &:focus {
     background:$main-dark;}
 }
+.logout {
+  padding:10px 20px;
+  margin: 20px;
+}
 
 .cancel {
   background:$main; 
   border-bottom-right-radius: 10px;
 } 
- 
+
+.error-msg {
+  color:$danger;
+  text-align: center;
+  width: 100%;
+  padding: 20px 5px ;
+  white-space: pre-line;
+  visibility: hidden;
+}
+.error-input {
+  border-color: $danger !important;
+}
 
 @media (min-width:1200px) {
   .row {

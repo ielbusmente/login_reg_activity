@@ -1,12 +1,23 @@
 import React, { useState } from "react";
 
-const Login = () => {
+const Login = ({ setstudent, auth }) => {
 	const [studentNumb, setstudentNumb] = useState(``);
 	const [password, setpassword] = useState(``);
+	const [error, seterror] = useState(false);
+	function handleLogin(e) {
+		e.preventDefault();
+
+		seterror("");
+		const manggagamit = auth(studentNumb, password);
+		if (manggagamit.passMatch) {
+			setstudent(manggagamit.user);
+			alert("Welcome");
+		} else seterror(true);
+	}
 	return (
 		<div>
 			<div id="login">
-				<form>
+				<form onSubmit={handleLogin}>
 					<div className="field-wrap">
 						<label
 							className={`${studentNumb !== "" ? `active highlight` : ``}`}
@@ -14,10 +25,13 @@ const Login = () => {
 							Student Number<span className="req">*</span>
 						</label>
 						<input
-							type="text"
+							type="number"
 							required
 							autoComplete="off"
-							onChange={e => setstudentNumb(e.target.value)}
+							onChange={e => {
+								setstudentNumb(e.target.value);
+								seterror(false);
+							}}
 							value={studentNumb}
 						/>
 					</div>
@@ -30,7 +44,10 @@ const Login = () => {
 							type="password"
 							required
 							autoComplete="off"
-							onChange={e => setpassword(e.target.value)}
+							onChange={e => {
+								setpassword(e.target.value);
+								seterror(false);
+							}}
 							value={password}
 						/>
 					</div>
@@ -38,24 +55,24 @@ const Login = () => {
 					{/* <p className="forgot"><a href="#">Forgot Password?</a></p> */}
 
 					<div className="buttons">
-						<button
-							className="button"
-							onClick={() => {
-								studentNumb !== "" && password !== "" && alert("Welcome");
-							}}
-						>
-							Log In
-						</button>
+						<button className="button">Log In</button>
 						<button
 							type="button"
 							className="button cancel"
 							onClick={() => {
 								setstudentNumb(``);
 								setpassword(``);
+								seterror(false);
 							}}
 						>
 							Cancel
 						</button>
+					</div>
+					<div
+						style={{ visibility: error ? "visible" : "hidden" }}
+						className="error-msg"
+					>
+						<span>Student Number/Password is incorrect</span>
 					</div>
 				</form>
 			</div>
