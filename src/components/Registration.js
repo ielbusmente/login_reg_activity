@@ -21,7 +21,7 @@ const Registration = ({ findUser, rehistro }) => {
 			password.match(/[a-z]+/) &&
 			password.match(/[0-9]+/) &&
 			password.match(/[A-Z]+/) &&
-			password.match(/[$&+,:;=?@#|'<>.^*()%!-]+/) &&
+			password.match(/[$&+,:;=?@#|'<>.^*()%!-_]+/) &&
 			password.length >= 8 &&
 			password.length <= 20
 		);
@@ -35,14 +35,22 @@ const Registration = ({ findUser, rehistro }) => {
 		setpasswordConfError("");
 
 		const invalidStudentNumber = findUser(studentNumb);
+    const invalidDigits = 
+    studentNumb >= 9999999999 ||
+    studentNumb <= 1000000000 ||
+    studentNumb % 1 !== 0;
 		const passwordValid = isPasswordValid();
 		const passwordsMatch = password === confirmPassword;
 
-		if (invalidStudentNumber || !passwordValid || !passwordsMatch) {
+		if (invalidStudentNumber || !passwordValid || !passwordsMatch || invalidDigits) {
 			let errorString = "";
 			if (invalidStudentNumber) {
 				setstudentNumberror("error-input");
 				errorString += "Student Number already registered\n";
+			}
+			if (invalidDigits) {
+				setstudentNumberror("error-input");
+				errorString += "Student Number must be 10 digits without a decimal\n";
 			}
 			if (!passwordValid) {
 				setpasswordError("error-input");
@@ -148,8 +156,6 @@ const Registration = ({ findUser, rehistro }) => {
 							<input
 								type="number"
 								required
-								max={9999999999}
-								min={1000000000}
 								className={`${studentNumberror}`}
 								autoComplete="off"
 								onChange={e => {
