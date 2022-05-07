@@ -9,10 +9,9 @@ const Login = ({ setstudent, auth }) => {
 
 		seterror("");
 		const manggagamit = auth(studentNumb, password);
-		if (manggagamit.passMatch) {
-			setstudent(manggagamit.user);
-			alert("Welcome");
-		} else seterror(true);
+		if (!manggagamit.passMatch) seterror(true);
+		setstudent(manggagamit.user);
+		alert("Welcome");
 	}
 	return (
 		<div>

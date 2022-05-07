@@ -14,7 +14,7 @@ function App() {
 		{
 			lastName: "Francisco",
 			firstName: "Richmond Andrei",
-			MidName: "",
+			midName: "",
 			studentNumber: "2018123456",
 			college: "CICS",
 			program: "BSIT",
@@ -24,7 +24,7 @@ function App() {
 		{
 			lastName: "Busmente",
 			firstName: "Daniel",
-			MidName: "",
+			midName: "",
 			studentNumber: "2018112067",
 			college: "CICS",
 			program: "BSIT",
@@ -56,18 +56,33 @@ function App() {
 		setstudent({});
 	}
 
-	function rehistro(e, u, p) {
+	function rehistro(
+		lastName,
+		firstName,
+		midName,
+		studentNumber,
+		college,
+		program,
+		yearLevel,
+		p
+	) {
 		let tempArray = deybateys;
-		tempArray.push({ email: e, username: u, password: hash(p) });
+		tempArray.push({
+			lastName,
+			firstName,
+			midName,
+			studentNumber,
+			college,
+			program,
+			yearLevel,
+			password: hash(p),
+		});
 		setdeybateys(tempArray);
 	}
 
 	useEffect(() => {
 		console.log(deybateys);
 	}, [deybateys]);
-	useEffect(() => {
-		console.log(JSON.stringify(student));
-	}, [student.studentNumber]);
 
 	return (
 		<>
@@ -78,9 +93,21 @@ function App() {
 						display: "flex",
 						flexDirection: "column",
 						alignItems: "center",
+						textAlign: "center",
 					}}
 				>
-					Logged In
+					Logged In as{" "}
+					{`${student.firstName} ${student.midName} ${student.lastName}`} <br />
+					Student Number: {student.studentNumber}
+					<br />
+					College: {student.college}
+					<br />
+					Program: {student.program}
+					<br />
+					Year Level: {student.yearLevel}
+					<br />
+					Hashed Password: {student.password}
+					<br />
 					<button onClick={bahalaSaLogout} className="button logout">
 						Log out
 					</button>
@@ -101,7 +128,7 @@ function App() {
 					</ul>
 					<div className="tab-content">
 						{signup ? (
-							<Registration findUser={findUser} />
+							<Registration findUser={findUser} rehistro={rehistro} />
 						) : (
 							<Login setstudent={setstudent} auth={auth} />
 						)}

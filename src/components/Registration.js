@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Registration = ({ findUser }) => {
+const Registration = ({ findUser, rehistro }) => {
 	const [studentNumb, setstudentNumb] = useState(``);
 	const [lastName, setlastName] = useState(``);
 	const [firstName, setfirstName] = useState(``);
@@ -10,6 +10,7 @@ const Registration = ({ findUser }) => {
 	const [yearLevel, setyearLevel] = useState(``);
 	const [password, setpassword] = useState(``);
 	const [confirmPassword, setConfirmPassword] = useState(``);
+
 	const [error, seterror] = useState(``);
 	const [studentNumberror, setstudentNumberror] = useState(``);
 	const [passwordError, setpasswordError] = useState(``);
@@ -52,9 +53,19 @@ const Registration = ({ findUser }) => {
 				setpasswordConfError("error-input");
 				errorString += "Passwords do not match\n";
 			}
-			console.log(errorString);
 			return seterror(errorString);
 		}
+
+		rehistro(
+			lastName,
+			firstName,
+			middleName,
+			studentNumb,
+			college,
+			program,
+			yearLevel,
+			password
+		);
 
 		alert("Inputted Details are being saved");
 	}
